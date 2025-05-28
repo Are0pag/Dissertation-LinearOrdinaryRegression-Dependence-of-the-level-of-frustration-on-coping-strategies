@@ -1,0 +1,6 @@
+if (!require("MASS")) install.packages("MASS")
+library(MASS)
+if (!require("car")) install.packages("car")
+library(car)
+if(!require("pscl")) install.packages("pscl")
+library(pscl)
