@@ -22,6 +22,10 @@ model <- polr (
   method = "logistic"  # явно указываем метод
 )
 
+# Проверка на мультиколлинеарность
+vif_values <- vif(model)
+print(vif_values)
+
 # 2. Сводка модели
 summary(model)
 

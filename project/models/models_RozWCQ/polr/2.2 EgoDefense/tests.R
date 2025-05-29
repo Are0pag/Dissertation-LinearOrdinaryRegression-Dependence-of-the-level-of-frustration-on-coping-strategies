@@ -8,7 +8,7 @@ data_ordered <- ordered(data_Rosenzweig$EgoDefense)
 #Pr(Chi) = 0.001479852
 model <- polr (
   data_ordered ~ 
-    data_WCQ$Seeking_social_support
+    data_WCQ$Taking_responsibility
     # data_WCQ$Confrontation + 
     # data_WCQ$Distancing + 
     # data_WCQ$Self_control + 
