@@ -5,17 +5,10 @@ source("project/models/models_RozWCQ/data/dataRozWCQ.R")
 # 1. Построение модели
 data_ordered <- ordered(data_Rosenzweig$EgoDefense)
 
-#Pr(Chi) = 0.001479852
+#Pr(Chi) = 0.003782057
 model <- polr (
   data_ordered ~ 
-    data_WCQ$Confrontation +           # 1.77435
-    data_WCQ$Distancing + 
-    data_WCQ$Self_control +            # -1.52272
-    data_WCQ$Seeking_social_support + 
-    data_WCQ$Taking_responsibility + 
-    data_WCQ$Escape_avoidance +        # 1.65406
-    data_WCQ$Problem_solving_planning + 
-    data_WCQ$Positive_reassessment 
+    data_WCQ$Seeking_social_support # 2.711
   ,
   
   Hess = TRUE,
