@@ -1,28 +1,27 @@
 source("project/models/models_RozMDICS/dependencies.R")
 
-y_ordered <- ordered(data_Rosenzweig$Extrapunitive)
+y_ordered <- ordered(data_Rosenzweig$Intropunitive)
 
 # Объединение редких дезадаптивных стратегий
-data_MDICS_coping_strategies$Cognitive_grouped <- fct_collapse(
-  as.factor(data_MDICS_coping_strategies$Cognitive_sphere),
-  Maladaptive = c("Acceptance","Ignoring", "Dissimulation", "Confusion"),
-  "Problem analysis" = "Problem analysis",
-  "Maintaining composure" = "Maintaining composure",
-  "Finding meaning" = "Finding meaning",
-  "Relativity" = "Relativity",
-  "Religiosity" = "Religiosity"
+data_MDICS_coping_strategies$Emotional_groped <- fct_collapse(
+  as.factor(data_MDICS_coping_strategies$Emotional_sphere),
+  Maladaptive = c("Suppression of emotions","Self-blame", "Submission", "Aggressiveness"),
+  "Optimism" = "Optimism",
+  "Protest" = "Protest",
+  "Emotional release" = "Emotional release",
+  "Passive cooperation" = "Passive cooperation"
 )
 
 # Установка "Maladaptive" как референтной категории
-data_MDICS_coping_strategies$Cognitive_grouped <- relevel(
-  data_MDICS_coping_strategies$Cognitive_grouped, 
+data_MDICS_coping_strategies$Emotional_groped <- relevel(
+  data_MDICS_coping_strategies$Emotional_groped, 
   ref = "Maladaptive"
 )
 
 # Model building
 model <- polr (
   y_ordered ~ 
-    as.factor(data_MDICS_coping_strategies$Cognitive_grouped)
+    as.factor(data_MDICS_coping_strategies$Emotional_groped)
   ,
   
   Hess = TRUE,
@@ -39,7 +38,7 @@ Anova(model)
 pR2(model)
 
 # 5. Экспоненцированные коэффициенты (отношения шансов)
-#exp(cbind(OR = coef(model), confint(model)))
+exp(cbind(OR = coef(model), confint(model)))
 
 # 6. Сравнение с нулевой моделью
 null_model <- polr(y_ordered ~ 1, Hess = TRUE) 
