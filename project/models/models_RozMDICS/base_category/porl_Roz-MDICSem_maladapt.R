@@ -1,27 +1,33 @@
 source("project/models/models_RozMDICS/dependencies.R")
 
-y_ordered <- ordered(data_Rosenzweig$Intropunitive)
+y_ordered <- ordered(data_Rosenzweig$NeedPersistence)
 
-# Объединение редких дезадаптивных стратегий
-data_MDICS_coping_strategies$Emotional_groped <- fct_collapse(
-  as.factor(data_MDICS_coping_strategies$Emotional_sphere),
-  Maladaptive = c("Suppression of emotions","Self-blame", "Submission", "Aggressiveness"),
-  "Optimism" = "Optimism",
-  "Protest" = "Protest",
-  "Emotional release" = "Emotional release",
-  "Passive cooperation" = "Passive cooperation"
+# # Объединение редких дезадаптивных стратегий
+# data_MDICS_coping_strategies$Emotional_groped <- fct_collapse(
+#   as.factor(data_MDICS_coping_strategies$Emotional_sphere),
+#   Maladaptive = c("Suppression of emotions","Self-blame", "Submission", "Aggressiveness"),
+#   "Optimism" = "Optimism",
+#   "Protest" = "Protest",
+#   "Emotional release" = "Emotional release",
+#   "Passive cooperation" = "Passive cooperation"
+# )
+
+data_MDICS_coping_strategies$Emotional_sphere_lumped <- lump_min (
+  column = data_MDICS_coping_strategies$Emotional_sphere,
+  min_value = 3
 )
 
-# Установка "Maladaptive" как референтной категории
-data_MDICS_coping_strategies$Emotional_groped <- relevel(
-  data_MDICS_coping_strategies$Emotional_groped, 
-  ref = "Maladaptive"
+print(table(data_MDICS_coping_strategies$Emotional_sphere_lumped))
+
+data_MDICS_coping_strategies$Emotional_sphere_lumped <- relevel(
+  data_MDICS_coping_strategies$Emotional_sphere_lumped, 
+  ref = "Emotional release"
 )
 
 # Model building
 model <- polr (
   y_ordered ~ 
-    as.factor(data_MDICS_coping_strategies$Emotional_groped)
+    as.factor(data_MDICS_coping_strategies$Emotional_sphere_lumped)
   ,
   
   Hess = TRUE,

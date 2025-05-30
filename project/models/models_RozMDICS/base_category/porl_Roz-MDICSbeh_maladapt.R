@@ -3,27 +3,31 @@ source("project/models/models_RozMDICS/dependencies.R")
 y_ordered <- ordered(data_Rosenzweig$NeedPersistence)
 
 # Объединение редких дезадаптивных стратегий
-data_MDICS_coping_strategies$Behavioral_grouped <- fct_collapse(
-  as.factor(data_MDICS_coping_strategies$Behavioral_sphere),
-  Maladaptive = c("Retreat"),
-  "Altruism" = "Altruism",
-  "Appeal" = "Appeal",
-  "Collaboration" = "Collaboration",
-  "Compensation" = "Compensation",
-  "Constructive activity" = "Constructive activity",
-  "Distraction" = "Distraction"
+# data_MDICS_coping_strategies$Behavioral_grouped <- fct_collapse(
+#   as.factor(data_MDICS_coping_strategies$Behavioral_sphere),
+#   Maladaptive = c("Retreat"),
+#   "Altruism" = "Altruism",
+#   "Appeal" = "Appeal",
+#   "Collaboration" = "Collaboration",
+#   "Compensation" = "Compensation",
+#   "Constructive activity" = "Constructive activity",
+#   "Distraction" = "Distraction"
+# )
+
+data_MDICS_coping_strategies$Behavioral_sphere_lumped <- lump_min (
+  column = data_MDICS_coping_strategies$Behavioral_sphere,
+  min_value = 3
 )
 
-# Установка "Maladaptive" как референтной категории
-data_MDICS_coping_strategies$Behavioral_grouped <- relevel(
-  data_MDICS_coping_strategies$Behavioral_grouped, 
-  ref = "Maladaptive"
+data_MDICS_coping_strategies$Behavioral_sphere_lumped <- relevel(
+  data_MDICS_coping_strategies$Behavioral_sphere_lumped, 
+  ref = "Retreat"
 )
 
 # Model building
 model <- polr (
   y_ordered ~ 
-    as.factor(data_MDICS_coping_strategies$Behavioral_grouped)
+    as.factor(data_MDICS_coping_strategies$Behavioral_sphere_lumped)
   ,
   
   Hess = TRUE,

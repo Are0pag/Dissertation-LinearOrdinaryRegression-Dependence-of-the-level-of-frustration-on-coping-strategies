@@ -1,7 +1,7 @@
 source("project/models/models_RozMDICS/dependencies.R")
 source("project/tools/data_adapters/lump_min.R")
 
-y_ordered <- ordered(data_Rosenzweig$EgoDefense)
+y_ordered <- ordered(data_Rosenzweig$NeedPersistence)
 
 # # Объединение редких дезадаптивных стратегий
 # data_MDICS_coping_strategies$Cognitive_grouped <- fct_collapse(
