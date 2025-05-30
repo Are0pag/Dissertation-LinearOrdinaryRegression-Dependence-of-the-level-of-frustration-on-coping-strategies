@@ -6,12 +6,26 @@ y_ordered <- ordered(data_Rosenzweig$Extrapunitive)
 
 # незначимый Pr(>Chisq) при min_value >= 7
 predictor_single <- lump_min(
-  column = data_MDICS_coping_strategies$Behavioral_sphere,
-  min_value = 5
+  column = data_MDICS_coping_strategies$Cognitive_sphere,
+  min_value = 2
 )
 
-#data_MDICS_coping_strategies$Current <- predictor_single
-#View(data_MDICS_coping_strategies)
+levels(as.factor(predictor_single))
+
+# predictor_single <- 
+#   relevel(
+#     as.factor(predictor_single), 
+#     ref = "Retreat")
+# 
+# levels(as.factor(predictor_single))
+
+data_MDICS_coping_strategies$Current <- predictor_single
+View(data_MDICS_coping_strategies)
+
+# Подсчет количества каждого результата в столбце Current
+result_counts <- table(data_MDICS_coping_strategies$Current)
+print(result_counts)
+
 
 model <- polr (
   y_ordered ~ 

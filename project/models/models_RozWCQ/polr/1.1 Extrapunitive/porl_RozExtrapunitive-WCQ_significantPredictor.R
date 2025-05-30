@@ -3,12 +3,12 @@ source("project/models/models_RozWCQ/data/dataRozWCQ.R")
 
 
 # 1. Построение модели
-data_ordered <- ordered(data_Rosenzweig$Extrapunitive)
+data_ordered <- ordered(data_Rosenzweig$NeedPersistence)
 
 #Pr(Chi) = 0.06207748
 model <- polr (
   data_ordered ~ 
-    data_WCQ$Positive_reassessment 
+    data_WCQ$Positive_reassessment
   ,
   
   Hess = TRUE,

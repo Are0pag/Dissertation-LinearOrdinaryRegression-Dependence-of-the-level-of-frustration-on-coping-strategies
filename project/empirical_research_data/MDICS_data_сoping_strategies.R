@@ -11,6 +11,8 @@ data_MDICS_coping_strategies <- data.frame(
     "Distraction", "Retreat", "Collaboration", "Distraction")
 )
 
+print(table(data_MDICS_coping_strategies$Behavioral_sphere))
+
 data_MDICS_coping_strategies$Cognitive_sphere <- c(
   "Maintaining composure", "Problem analysis", "Finding meaning", 
   "Acceptance", "Dissimulation", "Finding meaning", "Relativity", 
@@ -23,6 +25,8 @@ data_MDICS_coping_strategies$Cognitive_sphere <- c(
   "Maintaining composure", "Maintaining composure", "Dissimulation", 
   "Maintaining composure", "Finding meaning", "Religiosity", "Ignoring"
 )
+
+print(table(data_MDICS_coping_strategies$Cognitive_sphere))
 
 data_MDICS_coping_strategies$Emotional_sphere <- c(
   "Suppression of emotions", "Emotional release", "Submission", 
