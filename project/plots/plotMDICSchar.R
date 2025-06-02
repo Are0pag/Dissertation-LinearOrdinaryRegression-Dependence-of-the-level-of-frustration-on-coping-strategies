@@ -44,6 +44,8 @@ data_MDICS <- data.frame(
   )
 )
 
+#View (data_MDICS)
+
 # Преобразуем данные, оставляем только "Адаптивный" и "Неадаптивный"
 plot_data <- data_MDICS %>%
   pivot_longer(
@@ -111,4 +113,4 @@ percentage_table_MDICS <- plot_data %>%
   rename("Сфера" = Сфера)
 
 # Выводим таблицу в виде окна
-View(percentage_table_MDICS)
+#View(percentage_table_MDICS)
