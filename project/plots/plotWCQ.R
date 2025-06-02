@@ -85,3 +85,18 @@ ggplot(result_WCQ) +
     panel.grid.major.x = element_blank()
   )
 
+# Создаем таблицу с процентными соотношениями
+percentage_table <- result_WCQ %>%
+  select(Scale, high, low) %>%
+  group_by(Scale) %>%
+  summarise(
+    `Высокий уровень (%)` = sum(high),
+    `Низкий уровень (%)` = sum(low),
+    .groups = "drop"
+  ) %>%
+  rename("Шкала" = Scale)
+
+# Выводим таблицу в виде окна
+View(percentage_table)
+
+

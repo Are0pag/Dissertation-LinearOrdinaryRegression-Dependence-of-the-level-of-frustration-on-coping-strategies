@@ -1,4 +1,6 @@
 source("project/plots/libs_and_data.R")
+
+
 # Данные (уже загружены, но переименуем сферы на русский)
 data_MDICS <- data.frame(
   "Поведенческая сфера" = c(
@@ -96,3 +98,17 @@ ggplot(plot_data, aes(x = Сфера, y = Процент, fill = Тип_копи
     legend.position = "top",
     panel.grid.major.x = element_blank()
   )
+
+# Создаем таблицу с процентными соотношениями
+percentage_table_MDICS <- plot_data %>%
+  select(Сфера, Тип_копинга, Процент) %>%
+  group_by(Сфера, Тип_копинга) %>%
+  summarise(
+    `Процент` = sum(Процент),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(names_from = Тип_копинга, values_from = Процент, values_fill = 0) %>%
+  rename("Сфера" = Сфера)
+
+# Выводим таблицу в виде окна
+View(percentage_table_MDICS)

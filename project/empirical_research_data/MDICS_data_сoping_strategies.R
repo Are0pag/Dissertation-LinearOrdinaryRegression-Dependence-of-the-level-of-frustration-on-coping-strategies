@@ -41,7 +41,7 @@ data_MDICS_coping_strategies$Emotional_sphere <- c(
 
 #View(data_MDICS_coping_strategies)
 
-create_rus <- function() {
+
   data_MDICS_coping_strategies_rus <- data.frame(
     Behavioral_sphere = c(
       "Отвлечение", "Сотрудничество", "Отступление", "Отступление", 
@@ -77,7 +77,7 @@ create_rus <- function() {
     "Протест", "Протест", "Оптимизм", "Протест", "Подавление эмоций", 
     "Оптимизм", "Оптимизм", "Оптимизм"
   )
-}
+
 
 
 
