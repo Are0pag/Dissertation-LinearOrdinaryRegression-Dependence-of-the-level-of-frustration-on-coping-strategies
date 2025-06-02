@@ -25,13 +25,13 @@ plot_data <- data %>%
 
 # Русские названия шкал с переносами строк (в нужном порядке)
 russian_labels <- c(
-  "E" = "Экстрапунитивные\nреакции (%)", 
-  "I" = "Интропунитивные\nреакции (%)", 
-  "M" = "Импунитивные\nреакции (%)",
-  "OD" = "Тип реакции\n«с фиксацией на препятствии»\n(%)", 
-  "ED" = "Тип реакции\n«с фиксацией на самозащите»\n(%)", 
-  "NP" = "Тип реакции\n«с фиксацией на\nудовлетворении потребности»\n(%)",
-  "GCR" = "Степень социальной\nадаптации (GCR) %"
+  "E" = "Экстрапунитивные\nреакции (E)", 
+  "I" = "Интропунитивные\nреакции (I)", 
+  "M" = "Импунитивные\nреакции (M)",
+  "OD" = "Тип реакции\n«с фиксацией на препятствии»\n(OD)", 
+  "ED" = "Тип реакции\n«с фиксацией на самозащите»\n(ED)", 
+  "NP" = "Тип реакции\n«с фиксацией на\nудовлетворении потребности»\n(NP)",
+  "GCR" = "Степень социальной\nадаптации (GCR)"
 )
 
 # Создаем график
@@ -41,8 +41,8 @@ ggplot(plot_data) +
     aes(x = Scale, xend = Scale, 
         y = Norm, yend = Score, 
         color = Direction),
-    linewidth = 0.3,
-    alpha = 0.6,
+    linewidth = 0.8,
+    alpha = 0.8,
     position = position_jitter(width = 0.2, seed = 123)
   ) +
   # Нормативы (толстые черные линии)
@@ -57,15 +57,16 @@ ggplot(plot_data) +
   # Подписи нормативов
   geom_text(
     data = norms %>% mutate(Scale = factor(Scale, levels = c("E", "I", "M", "OD", "ED", "NP", "GCR"))),
-    aes(x = Scale, y = Norm, label = Norm),
+    aes(x = Scale, y = Norm, label = paste0(Norm, "%")),
     vjust = -0.5, # Этот параметр отвечает за вертикальное смещение подписей
-    hjust = -1.1,   # Горизонтальное смещение (по центру)
+    hjust = -1.26,   # Горизонтальное смещение (по центру)
     size = 3,
     color = "black",
-    fontface = "bold"
+    #fontface = "bold"
   ) +
   # Настройки осей
   scale_x_discrete(labels = russian_labels) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +  # Добавляем проценты к оси y
   scale_color_manual(
     values = c("Выше нормы" = "#4daf4a", "Ниже нормы" = "#e41a1c"),
     name = NULL  # Убираем заголовок легенды
