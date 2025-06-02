@@ -1,7 +1,9 @@
 source("project/models/models_RozMDICS/dependencies.R")
 source("project/tools/data_adapters/lump_min.R")
 
-y_ordered <- ordered(data_Rosenzweig$NeedPersistence)
+source("project/empirical_research_data/Wasserman_data.R")
+
+y_ordered <- ordered(data_Wasserman$Integral_level_of_social_frustration)
 
 # # Объединение редких дезадаптивных стратегий
 # data_MDICS_coping_strategies$Cognitive_grouped <- fct_collapse(
@@ -14,25 +16,23 @@ y_ordered <- ordered(data_Rosenzweig$NeedPersistence)
 #   "Religiosity" = "Religiosity"
 # )
 
-data_MDICS_coping_strategies$Cognitive_grouped_lumped <- lump_min (
+data_MDICS_coping_strategies$Cognitive_grouped <- lump_min (
   column = data_MDICS_coping_strategies$Cognitive_sphere,
   min_value = 3
 )
 
 # Установка "Maladaptive" как референтной категории
-data_MDICS_coping_strategies$Cognitive_grouped <- relevel(
+data_MDICS_coping_strategies$Cognitive_grouped_ref <- relevel(
   data_MDICS_coping_strategies$Cognitive_grouped,
   ref = "Problem analysis"
 )
 
-
-
-print(table(data_MDICS_coping_strategies$Cognitive_grouped_lumped))
+#print(table(data_MDICS_coping_strategies$Cognitive_grouped_ref))
 
 # Model building
 model <- polr (
   y_ordered ~ 
-    as.factor(data_MDICS_coping_strategies$Cognitive_grouped)
+    as.factor(data_MDICS_coping_strategies$Cognitive_grouped_ref)
   ,
   
   Hess = TRUE,

@@ -1,18 +1,17 @@
 source("project/models/models_RozMDICS/dependencies.R")
 
-y_ordered <- ordered(data_Rosenzweig$NeedPersistence)
+source("project/empirical_research_data/Wasserman_data.R")
 
-# data_MDICS_coping_characteristics$Behavioral_sphere <- relevel(
-#   data_MDICS_coping_characteristics$Behavioral_sphere, 
-#   ref = "Unconstructive"
-# )
-
-# Model building
+y_ordered <- ordered(data_Wasserman$Integral_level_of_social_frustration)
+#y_ordered <- ordered(data_Rosenzweig$EgoDefense)
 model <- polr (
   y_ordered ~ 
+    as.factor(data_MDICS_coping_characteristics$Behavioral_sphere) 
+  +
+    as.factor(data_MDICS_coping_characteristics$Cognitive_sphere)
+  +
     as.factor(data_MDICS_coping_characteristics$Emotional_sphere)
   ,
-  
   Hess = TRUE,
   method = "logistic"  # явно указываем метод
 )

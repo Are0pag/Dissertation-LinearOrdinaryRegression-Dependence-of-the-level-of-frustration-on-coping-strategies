@@ -45,7 +45,7 @@ data_MDICS_coping_characteristics$Emotional_sphere = c(
 
 #View(data_MDICS_coping_characteristics)
 
-create_rus <- function() {
+
   
   data_MDICS_coping_characteristics_rus <- data.frame(
     Behavioral_sphere = c(
@@ -90,6 +90,6 @@ create_rus <- function() {
     "Неконструктивный", "Конструктивный", "Конструктивный",
     "Конструктивный", "Относительно конструктивный"
   )
-}
+
 
 

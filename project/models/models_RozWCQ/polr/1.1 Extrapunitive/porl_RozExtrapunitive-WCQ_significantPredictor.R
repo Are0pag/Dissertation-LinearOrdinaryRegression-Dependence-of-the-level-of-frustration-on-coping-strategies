@@ -1,16 +1,13 @@
 source("project/models/libs.R")
 source("project/models/models_RozWCQ/data/dataRozWCQ.R")
 
+source("project/empirical_research_data/Wasserman_data.R")
 
-# 1. Построение модели
-data_ordered <- ordered(data_Rosenzweig$NeedPersistence)
-
-#Pr(Chi) = 0.06207748
+data_ordered <- ordered(data_Wasserman$Integral_level_of_social_frustration)
 model <- polr (
   data_ordered ~ 
-    data_WCQ$Positive_reassessment
+    data_WCQ$Confrontation
   ,
-  
   Hess = TRUE,
   method = "logistic"  # явно указываем метод
 )

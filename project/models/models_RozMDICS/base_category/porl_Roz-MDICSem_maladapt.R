@@ -1,38 +1,30 @@
 source("project/models/models_RozMDICS/dependencies.R")
 
-y_ordered <- ordered(data_Rosenzweig$NeedPersistence)
+source("project/empirical_research_data/Wasserman_data.R")
 
-# # Объединение редких дезадаптивных стратегий
-# data_MDICS_coping_strategies$Emotional_groped <- fct_collapse(
-#   as.factor(data_MDICS_coping_strategies$Emotional_sphere),
-#   Maladaptive = c("Suppression of emotions","Self-blame", "Submission", "Aggressiveness"),
-#   "Optimism" = "Optimism",
-#   "Protest" = "Protest",
-#   "Emotional release" = "Emotional release",
-#   "Passive cooperation" = "Passive cooperation"
-# )
+#y_ordered <- ordered(data_Wasserman$Integral_level_of_social_frustration)
+y_ordered <- ordered(data_Rosenzweig$Intropunitive)
 
 data_MDICS_coping_strategies$Emotional_sphere_lumped <- lump_min (
   column = data_MDICS_coping_strategies$Emotional_sphere,
   min_value = 3
 )
+#print(table(data_MDICS_coping_strategies$Emotional_sphere_lumped))
 
-print(table(data_MDICS_coping_strategies$Emotional_sphere_lumped))
-
-data_MDICS_coping_strategies$Emotional_sphere_lumped <- relevel(
+data_MDICS_coping_strategies$Emotional_sphere_lumped_ref <- relevel(
   data_MDICS_coping_strategies$Emotional_sphere_lumped, 
-  ref = "Emotional release"
+  ref = "Suppression of emotions"
 )
-
-# Model building
 model <- polr (
   y_ordered ~ 
-    as.factor(data_MDICS_coping_strategies$Emotional_sphere_lumped)
+    as.factor(data_MDICS_coping_strategies$Emotional_sphere_lumped_ref)
   ,
   
   Hess = TRUE,
   method = "logistic"  # явно указываем метод
 )
+
+#brant(model)
 
 # 2. Сводка модели
 summary(model)
