@@ -42,7 +42,7 @@ ggplot(plot_data) +
         y = Norm, yend = Score, 
         color = Direction),
     linewidth = 0.8,
-    alpha = 0.8,
+    alpha = 0.9,
     position = position_jitter(width = 0.2, seed = 123)
   ) +
   # Нормативы (толстые черные линии)
@@ -68,7 +68,7 @@ ggplot(plot_data) +
   scale_x_discrete(labels = russian_labels) +
   scale_y_continuous(labels = scales::percent_format(scale = 1)) +  # Добавляем проценты к оси y
   scale_color_manual(
-    values = c("Выше нормы" = "#4daf4a", "Ниже нормы" = "#e41a1c"),
+    values = c("Выше нормы" = "lightblue", "Ниже нормы" = "orange"),
     name = NULL  # Убираем заголовок легенды
   ) +
   labs(

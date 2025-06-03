@@ -16,6 +16,8 @@ result_WCQ <- data_WCQ %>%
   pivot_wider(names_from = Level, values_from = Percentage, values_fill = 0) %>%
   ungroup()
 
+View(result_WCQ)
+
 # Правильное преобразование названий (без NA)
 russian_names <- c(
   "Confrontation" = "Конфронтация",
@@ -81,7 +83,7 @@ ggplot(result_WCQ) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1, size = 10),
     plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-    legend.position = "top",
+    legend.position = "bottom",
     panel.grid.major.x = element_blank()
   )
 

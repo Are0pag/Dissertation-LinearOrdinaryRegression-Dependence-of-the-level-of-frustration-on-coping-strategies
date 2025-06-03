@@ -48,7 +48,7 @@ data_MDICS_coping_characteristics$Emotional_sphere = c(
 
   
   data_MDICS_coping_characteristics_rus <- data.frame(
-    Behavioral_sphere = c(
+    Поведенческая.сфера = c(
       "Относительно конструктивный", "Конструктивный", "Неконструктивный", 
       "Неконструктивный", "Конструктивный", "Относительно конструктивный", 
       "Неконструктивный", "Конструктивный", "Неконструктивный", 
@@ -63,7 +63,7 @@ data_MDICS_coping_characteristics$Emotional_sphere = c(
     )
   )
   
-  data_MDICS_coping_characteristics$Cognitive_sphere_rus = c(
+  data_MDICS_coping_characteristics_rus$Когнитивная.сфера = c(
     "Конструктивный", "Конструктивный", "Относительно конструктивный", 
     "Неконструктивный", "Неконструктивный", "Относительно конструктивный", 
     "Относительно конструктивный", "Конструктивный", "Относительно конструктивный", 
@@ -77,7 +77,7 @@ data_MDICS_coping_characteristics$Emotional_sphere = c(
     "Относительно конструктивный", "Неконструктивный"
   )
   
-  data_MDICS_coping_characteristics$Emotional_sphere_rus = c(
+  data_MDICS_coping_characteristics_rus$Эмоциональная.сфера = c(
     "Неконструктивный", "Относительно конструктивный", "Неконструктивный", 
     "Неконструктивный", "Относительно конструктивный", "Относительно конструктивный", 
     "Конструктивный", "Конструктивный", "Неконструктивный", 
@@ -91,5 +91,6 @@ data_MDICS_coping_characteristics$Emotional_sphere = c(
     "Конструктивный", "Относительно конструктивный"
   )
 
+  #View(data_MDICS_coping_characteristics_rus)
 
 
