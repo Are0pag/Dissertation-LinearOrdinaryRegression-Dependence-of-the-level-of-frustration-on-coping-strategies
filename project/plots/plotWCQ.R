@@ -16,17 +16,17 @@ result_WCQ <- data_WCQ %>%
   pivot_wider(names_from = Level, values_from = Percentage, values_fill = 0) %>%
   ungroup()
 
-View(result_WCQ)
+#View(result_WCQ)
 
 # Правильное преобразование названий (без NA)
 russian_names <- c(
   "Confrontation" = "Конфронтация",
   "Distancing" = "Дистанцирование",
   "Self_control" = "Самоконтроль",
-  "Seeking_social_support" = "Поиск поддержки",
+  "Seeking_social_support" = "Поиск социальной\nподдержки",
   "Taking_responsibility" = "Принятие ответственности",
   "Escape_avoidance" = "Бегство-Избегание",
-  "Problem_solving_planning" = "Планирование решения",
+  "Problem_solving_planning" = "Планирование решения\nпроблемы",
   "Positive_reassessment" = "Позитивная переоценка"
 )
 
@@ -66,18 +66,19 @@ ggplot(result_WCQ) +
   ) +
   # Настройки визуализации
   scale_fill_manual(
-    values = c("Высокий уровень" = "#1b9e77", "Низкий уровень" = "#d95f02"),
+    values = c("Высокий уровень" = "deepskyblue", "Низкий уровень" = "orange"),
     name = "Уровень"
   ) +
   scale_y_continuous(
     limits = c(0, max(c(result_WCQ$high, result_WCQ$low), na.rm = TRUE) * 1.1),
-    breaks = seq(0, 100, by = 10),
-    expand = expansion(mult = c(0, 0.1))
+    breaks = seq(0, 100, by = 5),
+    expand = expansion(mult = c(0, 0.1)),
+    labels = scales::percent_format(scale = 1)
   ) +
   labs(
     title = "Распределение стратегий совладания (WCQ)",
     x = "Шкалы",
-    y = "Процент респондентов"
+    y = "Процент"
   ) +
   theme_minimal() +
   theme(
@@ -98,7 +99,7 @@ percentage_table <- result_WCQ %>%
   ) %>%
   rename("Шкала" = Scale)
 
-# Выводим таблицу в виде окна
-View(percentage_table)
+
+#View(percentage_table)
 
 
