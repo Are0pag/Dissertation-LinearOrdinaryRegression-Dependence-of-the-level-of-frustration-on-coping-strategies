@@ -67,7 +67,10 @@ ggplot(plot_data) +
   ) +
   # Настройки осей
   scale_x_discrete(labels = russian_labels) +
-  scale_y_continuous(labels = scales::percent_format(scale = 1)) +  # Добавляем проценты к оси y
+  scale_y_continuous(
+    breaks = seq(0, 100, by = 5),
+    labels = scales::percent_format(scale = 1)
+    ) +  # Добавляем проценты к оси y
   scale_color_manual(
     values = c("Выше нормы" = "deepskyblue", "Ниже нормы" = "orange"),
     name = NULL  # Убираем заголовок легенды
