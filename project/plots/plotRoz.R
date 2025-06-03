@@ -17,12 +17,32 @@ norms <- data.frame(
   Scale = c("E",  "I",  "M",   "OD",  "ED",  "NP",  "GCR"),
   Norm = c( 43.4, 26.1, 30.5,  28.8,  36.3,  34.9,  56.1)
 )
+
+# Определяем пороги несущественных отклонений для каждой шкалы
+thresholds <- data.frame(
+  Scale = c("E", "I", "M", "OD", "ED", "NP", "GCR"),
+  Threshold = c(1.5, 1.0, 1.5, 1.5, 1.0, 1.0, 1.5) # в процентах
+)
+
+
 # Преобразуем данные с сохранением порядка шкал
 plot_data <- data %>%
   pivot_longer(everything(), names_to = "Scale", values_to = "Score") %>%
   left_join(norms, by = "Scale") %>%
   mutate(Direction = ifelse(Score > Norm, "Выше нормы", "Ниже нормы"),
          Scale = factor(Scale, levels = c("E", "I", "M", "OD", "ED", "NP", "GCR")))
+
+# Добавляем информацию о порогах к данным
+plot_data <- plot_data %>%
+  left_join(thresholds, by = "Scale") %>%
+  mutate(
+    Deviation = abs(Score - Norm),
+    Significance = ifelse(Deviation <= Threshold, "Несущественное отклонение", 
+                          ifelse(Score > Norm, "Выше нормы", "Ниже нормы")),
+    Significance = factor(Significance, levels = c("Несущественное отклонение", "Выше нормы", "Ниже нормы"))
+  )
+
+#View(plot_data)
 
 # Русские названия шкал с переносами строк (в нужном порядке)
 russian_labels <- c(
