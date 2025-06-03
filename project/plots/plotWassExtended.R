@@ -37,7 +37,7 @@ colors <- c("Отсутствие" = "gray90",
 # Построение графика
 ggplot(dfW, 
        aes(x = id, y = Integral_level_of_social_frustration, fill = level)) +
-  geom_col(width = 0.7) +
+  geom_col(width = 0.7, color = "black", linewidth = 0.3) +
   scale_fill_manual(values = colors, name = "Уровень фрустрированности") +
   geom_hline(yintercept = c(0.5, 1.5, 2.0, 2.5, 3.0, 3.5), 
              linetype = "dashed", color = "gray50", alpha = 0.7) +
