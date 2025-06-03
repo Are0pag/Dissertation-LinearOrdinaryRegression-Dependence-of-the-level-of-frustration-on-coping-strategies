@@ -47,37 +47,34 @@ strategy_data$Стратегия <- factor(strategy_data$Стратегия)
 ggplot(strategy_data, aes(x = Стратегия, y = Процент, fill = Адаптивность)) +
   geom_bar(stat = "identity", color = "black") +
   facet_wrap(~Сфера, scales = "free_x") +
-  scale_fill_manual(values = c(
-    "Неконструктивный" = alpha("#FF9999", 0.7),  # Светло-красный
-    "Относительно конструктивный" = "#FFCC99",  # Светло-оранжевый
-    "Конструктивный" = "#99FF99"  # Светло-зеленый
-  ), 
-  labels = c(
-    "Неконструктивный" = "Неадаптивный", 
-    "Относительно конструктивный" = "Относительно адаптивный", 
-    "Конструктивный" = "Адаптивный"
-  ),
-  name = "Тип адаптивности") +
-  scale_y_continuous(labels = scales::percent_format(scale = 1)) +  # Форматируем ось y в процентах
-  theme_minimal(base_size = 15) +  # Увеличиваем базовый размер шрифта
-  labs(
-    x = "Копинг-стратегия",
-    y = "Процент"
+  scale_fill_manual(
+    values = c(
+      "Неконструктивный" = alpha("#FF9999", 0.7),
+      "Относительно конструктивный" = "#FFCC99",
+      "Конструктивный" = "#99FF99"
+    ),
+    labels = c(
+      "Неконструктивный" = "Неадаптивный",
+      "Относительно конструктивный" = "Относительно адаптивный",
+      "Конструктивный" = "Адаптивный"
+    ),
+    name = "Тип адаптивности"
   ) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme_minimal(base_size = 15) +
+  labs(x = "Копинг-стратегия", y = "Процент") +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.major = element_line(color = "lightgray"),  # Добавляем основную сетку
-    panel.grid.minor = element_blank(),  # Убираем мелкую сетку
-    legend.position = "bottom",            # Легенда внизу
-    legend.title = element_text(size = 10) # Настройка заголовка легенды
+    panel.grid.major = element_line(color = "lightgray"),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.title = element_text(size = 10)
   ) +
-  geom_text(aes(label = paste0(round(Процент, 1), "%")),
-            position = position_stack(vjust = 1.15),
-            color = "black", size = 4) # Добавляем подписи к столбцам
-
-
-
-
-
-  
-  
+  # Исправленное позиционирование подписей:
+  geom_text(
+    aes(label = paste0(Процент, "%")),
+    position = position_dodge(width = 0.9),  # Для групповых столбцов
+    vjust = -0.5,  # Сдвигаем подписи ВВЕРХ на 0.5 единицы
+    size = 4,
+    color = "black"
+  )
