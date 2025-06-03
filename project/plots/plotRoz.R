@@ -55,13 +55,13 @@ russian_labels <- c(
   "GCR" = "Степень социальной\nадаптации (GCR)"
 )
 
-# Создаем график
+# Обновляем график
 ggplot(plot_data) +
   # Индивидуальные результаты (тонкие столбики)
   geom_segment(
     aes(x = Scale, xend = Scale, 
         y = Norm, yend = Score, 
-        color = Direction),
+        color = Significance),
     linewidth = 0.8,
     alpha = 0.9,
     position = position_jitter(width = 0.2, seed = 123)
@@ -73,40 +73,41 @@ ggplot(plot_data) +
         xend = as.numeric(Scale) + 0.4,
         y = Norm, yend = Norm),
     color = "black",
-    linewidth = 1
+    linewidth = 0.5
   ) +
   # Подписи нормативов
   geom_text(
     data = norms %>% mutate(Scale = factor(Scale, levels = c("E", "I", "M", "OD", "ED", "NP", "GCR"))),
     aes(x = Scale, y = Norm, label = paste0(Norm, "%")),
-    vjust = -0.5, # Этот параметр отвечает за вертикальное смещение подписей
-    hjust = -1.26,   # Горизонтальное смещение (по центру)
+    vjust = -0.5,
+    hjust = -1.26,
     size = 3,
-    color = "black",
-    #fontface = "bold"
+    color = "black"
   ) +
   # Настройки осей
   scale_x_discrete(labels = russian_labels) +
   scale_y_continuous(
     breaks = seq(0, 100, by = 5),
     labels = scales::percent_format(scale = 1)
-    ) +  # Добавляем проценты к оси y
+  ) +
   scale_color_manual(
-    values = c("Выше нормы" = "deepskyblue", "Ниже нормы" = "orange"),
-    name = NULL  # Убираем заголовок легенды
+    values = c("Несущественное отклонение" = "green", 
+               "Выше нормы" = "deepskyblue", 
+               "Ниже нормы" = "orange"),
+    name = NULL
   ) +
   labs(
     title = "Отклонения от нормативов Ясюковой (методика Розенцвейга)",
     x = "Шкалы",
     y = "Процентные значения",
-    caption = "Толстая черная линия показывает нормативное значение\nЗеленые линии - значения выше нормы, красные - ниже нормы"
+    caption = "Толстая черная линия показывает нормативное значение\nЗеленые линии - несущественные отклонения, голубые - выше нормы, оранжевые - ниже нормы"
   ) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(size = 9, angle = 45, hjust = 1, lineheight = 0.8),
     panel.grid.major.x = element_blank(),
-    legend.position = "bottom",  # Легенда внизу
+    legend.position = "bottom",
     plot.caption = element_text(hjust = 0.5, size = 9, margin = margin(t = 10)),
     plot.title = element_text(hjust = 0.5)
   ) +
-  guides(color = guide_legend(override.aes = list(linewidth = 2)))  # Утолщаем линии в легенде
+  guides(color = guide_legend(override.aes = list(linewidth = 2)))
