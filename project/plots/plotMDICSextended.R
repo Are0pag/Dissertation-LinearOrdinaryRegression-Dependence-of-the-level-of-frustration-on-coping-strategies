@@ -31,7 +31,7 @@ strategy_data <- bind_rows(
   # Рассчитываем процент использования каждой стратегии
   mutate(Процент = round(Количество / sum(Количество) * 100, 1))
   
-#View(strategy_data)
+View(strategy_data)
 #table(strategy_data$Стратегия, strategy_data$Сфера)
 #unique(strategy_data)
 
