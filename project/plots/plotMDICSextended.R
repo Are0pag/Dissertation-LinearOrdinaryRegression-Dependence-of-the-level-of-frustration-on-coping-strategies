@@ -38,7 +38,7 @@ strategy_data <- bind_rows(
 strategy_data$Стратегия <- factor(strategy_data$Стратегия)
 
 ggplot(strategy_data, aes(x = Стратегия, y = Процент, fill = Адаптивность)) +
-  geom_bar(stat = "identity", color = "black") +
+  geom_bar(stat = "identity", color = "black", linewidth = 0.1) +
   facet_wrap(~Сфера, scales = "free_x") +
   scale_fill_manual(
     values = c(
@@ -60,6 +60,11 @@ ggplot(strategy_data, aes(x = Стратегия, y = Процент, fill = А�
     axis.text.x = element_text(angle = 45, hjust = 1),
     panel.grid.major = element_line(color = "lightgray"),
     panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(
+      color = "grey90", # Очень светлые линии
+      linewidth = 0.8 # Тонкие линии
+    ),
     legend.position = "bottom",
     legend.title = element_text(size = 10)
   ) +
