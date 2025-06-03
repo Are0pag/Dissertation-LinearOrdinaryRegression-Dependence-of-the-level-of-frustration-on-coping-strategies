@@ -42,7 +42,14 @@ plot_data <- plot_data %>%
     Significance = factor(Significance, levels = c("Несущественное отклонение", "Выше нормы", "Ниже нормы"))
   )
 
-#View(plot_data)
+# Выбираем наиболее значимые отклонения для подписей (например, топ-3 в каждую сторону)
+top_deviations <- plot_data %>%
+  filter(Significance != "Несущественное отклонение") %>%
+  group_by(Significance) %>%
+  slice_max(order_by = Deviation, n = 3) %>% # Берем 3 наибольших отклонения в каждом направлении
+  ungroup()
+
+#View(top_deviations)
 
 # Русские названия шкал с переносами строк (в нужном порядке)
 russian_labels <- c(
