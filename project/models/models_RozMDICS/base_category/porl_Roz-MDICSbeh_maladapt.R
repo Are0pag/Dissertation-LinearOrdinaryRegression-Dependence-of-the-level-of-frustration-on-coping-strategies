@@ -1,5 +1,4 @@
 source("project/models/models_RozMDICS/dependencies.R")
-
 source("project/empirical_research_data/Wasserman_data.R")
 
 y_ordered <- ordered(data_Wasserman$Integral_level_of_social_frustration)
