@@ -76,7 +76,8 @@ ggplot(result_WCQ) +
     labels = scales::percent_format(scale = 1)
   ) +
   labs(
-    title = "Распределение стратегий совладания (WCQ)",
+    #title = "Распределение стратегий совладания (WCQ)",
+    title = " ",
     x = "Шкалы",
     y = "Процент"
   ) +
