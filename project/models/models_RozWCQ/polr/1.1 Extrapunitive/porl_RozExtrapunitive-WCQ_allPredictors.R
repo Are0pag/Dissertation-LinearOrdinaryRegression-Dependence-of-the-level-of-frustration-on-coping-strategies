@@ -1,9 +1,13 @@
 source("project/models/libs.R")
 source("project/models/models_RozWCQ/data/dataRozWCQ.R")
+source("project/empirical_research_data/Wasserman_data.R")
 
-
+View(data_Wasserman)
 # 1. Построение модели
-data_ordered <- ordered(data_Rosenzweig$Extrapunitive)
+#data_ordered <- ordered(data_Rosenzweig$Extrapunitive)
+data_ordered <- ordered(data_Wasserman$Integral_level_of_social_frustration)
+print(data_ordered)
+
 
 #Pr(Chi) = 0.01128418
 model <- polr (

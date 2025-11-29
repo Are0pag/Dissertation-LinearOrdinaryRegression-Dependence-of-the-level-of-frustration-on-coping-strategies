@@ -116,7 +116,7 @@ ggplot(plot_data) +
     axis.text.x = element_text(size = 9, angle = 45, hjust = 1, lineheight = 0.8),
     panel.grid.major.x = element_blank(),
     legend.position = "bottom",
-    plot.caption = element_text(hjust = 0.5, size = 9, margin = margin(t = 10)),
+    plot.caption = element_text(hjust = 0.5, size = 9, margin = margin(t = 10), vjust = 4.5),
     plot.title = element_text(hjust = 0.5)
   ) +
   guides(color = guide_legend(override.aes = list(linewidth = 2)))
